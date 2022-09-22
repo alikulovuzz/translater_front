@@ -5,13 +5,17 @@ import { error, success } from "../utils/notification";
 import copy from "copy-to-clipboard";
 import { AiFillCopy } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
-import { Animation } from "./Animation";
+// import { Animation } from "./Animation";
+import { BsFillMicFill } from "react-icons/bs";
+import { BsFillMicMuteFill } from "react-icons/bs";
+
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
+  const [mickIsWorking, setMickIsWorking] = useState(false);
 
   const handleSelectChange = ({ target: { value, id } }) => {
     id === "source" && setSource(value);
@@ -26,20 +30,26 @@ export const TranslateBox = () => {
     if (source === "" || target === "") {
       return error("Please select language");
     }
-    try {
-      let res = await axios.get(`http://89.249.63.227:8080/api`, {
-        params: {
-          text: q,
-          from_lang:source,
-          to_lang:target,
-        },
-      });
-      res = res.data.result;      
-      setOutput(res);
-    } catch (err) {
-      console.log(err);
-    }
+    
   };
+
+  const enterPressHendle = async event => {
+    if (event.which === 13) {
+      try {
+        let res = await axios.get(`http://89.249.63.227:8080/api`, {
+          params: {
+            text: q,
+            from_lang:source,
+            to_lang:target,
+          },
+        });
+        res = res.data.result;      
+        setOutput(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   const copyToClipboard = (text) => {
     copy(text);
@@ -70,7 +80,7 @@ export const TranslateBox = () => {
   return (
     <>
       <div className="mainBox">
-        <div>
+        <div className="main-box-one">
           <SelectBox id={"source"} select={handleSelectChange} />
           <div className="box">
             <textarea
@@ -79,10 +89,16 @@ export const TranslateBox = () => {
               }}
               value={q}
               className="outputResult"
+              onKeyPress={enterPressHendle}
             ></textarea>
           </div>
           <div className="iconBox">
             <p>{q.length}/250</p>
+            <div className="mick"
+              onMouseDown={ e => {setMickIsWorking(true)} } onMouseUp={ e => {setMickIsWorking(false)} }
+            >
+              <BsFillMicFill className={mickIsWorking?"mick-start":""}/>
+            </div>
             <AiFillCopy
               onClick={() => {
                 copyToClipboard(q);
@@ -93,7 +109,7 @@ export const TranslateBox = () => {
           </div>
         </div>
 
-        <div>
+        <div className="main-box-one">
           <SelectBox id={"target"} select={handleSelectChange} />
           <div className="outputResult box">
             <p id="output">{output}</p>
@@ -110,11 +126,7 @@ export const TranslateBox = () => {
         </div>
       </div>
 
-      <Animation />
-
-      <div className="tagLine">
-        <p id="madeByMohit">Made By Azamat</p>
-      </div>
+      {/* <Animation /> */}
     </>
   );
 };
