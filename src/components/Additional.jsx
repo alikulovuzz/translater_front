@@ -13,7 +13,7 @@ export default function Additional() {
                 <FaHistory/>
             </div>
             <div className="addbox-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tarix.
             </div>
         </div>
         <div className="addbox">
@@ -21,7 +21,7 @@ export default function Additional() {
                 <AiTwotoneStar/>
             </div>
             <div className="addbox-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Yashil.
             </div>
         </div>
         <div className="addbox">
@@ -29,7 +29,7 @@ export default function Additional() {
                 <MdPeopleAlt/>
             </div>
             <div className="addbox-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Oldingi.
             </div>
         </div>
     </div>

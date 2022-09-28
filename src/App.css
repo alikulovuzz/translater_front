@@ -223,7 +223,7 @@ select::-ms-expand {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 100px;
   padding-top: 20px;
   padding-bottom: 140px;
   padding-left: 30px;
@@ -239,7 +239,6 @@ select::-ms-expand {
   font-size: 24px;
   width: 50px;
   height: 50px;
-  background-color: #45b5aa;
   color: #fff;
   display: flex;
   align-items: center;
@@ -249,6 +248,18 @@ select::-ms-expand {
   margin-bottom: 20px;
 }
 
+.addbox:first-child .addbox-img{
+  background-color: #45b5aa;
+}
+
+.addbox:nth-child(2) .addbox-img{
+  background-color: #1d3557;
+}
+
+.addbox:last-child .addbox-img{
+  background-color: #457b9d;
+}
+
 .addbox {
   max-width: 300px;
   display: flex;
@@ -256,22 +267,31 @@ select::-ms-expand {
   align-items: center;
   flex-direction: column;
 }
-
+.outputResult {
+  background: #fff;
+}
 .addbox-text {
   text-align: center;
-  color: #45b5aa;
+  color: #000;
 }
 
 .footer {
   width: 100%;
   padding: 20px 30px;
   box-sizing: border-box;
-  text-align: center;
   position: fixed;
   left: 0;
   bottom: 0;
   background-color: #45b5aa;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.footer img {
+  width: 50px;
 }
 
 .mick {
@@ -291,11 +311,11 @@ select::-ms-expand {
   margin-left: 15px;
 }
 
-.mick:hover {
+/* .mick:hover {
   background-color: #45b5aa;
   color: #fff;
   transition: ease all .5s;
-}
+} */
 
 /* .mick:hover svg {
   animation: mymick 1s infinite;
@@ -303,6 +323,7 @@ select::-ms-expand {
 
 .mick-start {
   animation: mymick 1s infinite;
+  color: #e63946;
 }
 
 @keyframes mymick {
