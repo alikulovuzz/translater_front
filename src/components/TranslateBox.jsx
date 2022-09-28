@@ -5,9 +5,9 @@ import { error, success } from "../utils/notification";
 import copy from "copy-to-clipboard";
 import { AiFillCopy } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
-// import { Animation } from "./Animation";
 import { BsFillMicFill } from "react-icons/bs";
-import { BsFillMicMuteFill } from "react-icons/bs";
+import { useReactMediaRecorder } from "react-media-recorder";
+
 
 
 export const TranslateBox = () => {
@@ -16,6 +16,17 @@ export const TranslateBox = () => {
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
   const [mickIsWorking, setMickIsWorking] = useState(false);
+  const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ audio: true });
+
+  const audioStatus = (status) => {
+    if(status == "idle"){
+      return ''
+    } else if(status == "recording") {
+      return '...'
+    } else {
+      return ''
+    }
+  }
 
   const handleSelectChange = ({ target: { value, id } }) => {
     id === "source" && setSource(value);
@@ -56,6 +67,28 @@ export const TranslateBox = () => {
     success("Copied to clipboard!");
   };
 
+  const mickStart =  () => {
+    startRecording();
+    setMickIsWorking(true);
+  }
+
+  const mickStop =  async () => {
+    stopRecording();
+    setMickIsWorking(false);
+    try {
+      let res = await axios.post(`http://89.249.63.227:8080/api/audio`, {
+        params: {},
+        body: {
+          audio: mediaBlobUrl
+        }
+      });
+      res = res.data.result;      
+      setOutput(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const resetText = () => {
     if (q === "" && output === "") {
       error("Textbox is already empty!");
@@ -94,9 +127,10 @@ export const TranslateBox = () => {
           </div>
           <div className="iconBox">
             <p>{q.length}/250</p>
+            <p className='mick-status'>{audioStatus(status)}</p>
             <div className="mick"
-              onMouseDown={ e => {setMickIsWorking(true)} } onMouseUp={ e => {setMickIsWorking(false)} }
-            >
+              onMouseDown={mickStart} onMouseUp={mickStop}
+              >
               <BsFillMicFill className={mickIsWorking?"mick-start":""}/>
             </div>
             <AiFillCopy
@@ -108,7 +142,7 @@ export const TranslateBox = () => {
             <MdClear onClick={resetText} className="icon" />
           </div>
         </div>
-
+        
         <div className="main-box-one">
           <SelectBox id={"target"} select={handleSelectChange} />
           <div className="outputResult box">
@@ -125,7 +159,7 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-
+      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
       {/* <Animation /> */}
     </>
   );

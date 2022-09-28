@@ -287,6 +287,10 @@ select::-ms-expand {
   margin-left: 15px;
 }
 
+.mick-status{
+  margin-left: 15px;
+}
+
 .mick:hover {
   background-color: #45b5aa;
   color: #fff;
