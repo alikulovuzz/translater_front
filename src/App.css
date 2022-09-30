@@ -249,7 +249,7 @@ select::-ms-expand {
 }
 
 .addbox:first-child .addbox-img{
-  background-color: #45b5aa;
+  background-color: #457b9d;
 }
 
 .addbox:nth-child(2) .addbox-img{
@@ -257,7 +257,7 @@ select::-ms-expand {
 }
 
 .addbox:last-child .addbox-img{
-  background-color: #457b9d;
+  background-color: #E63946;
 }
 
 .addbox {
@@ -301,7 +301,7 @@ select::-ms-expand {
   height: 32px;
   /* background-color: #000; */
   /* margin: 10px 0 0 15px; */
-  color: #45b5aa;
+  color: #06d6a0;
   padding: 8px;
   /* background-color: #45b5aa; */
   border-radius: 50%;

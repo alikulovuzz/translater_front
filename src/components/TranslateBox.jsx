@@ -19,10 +19,10 @@ export const TranslateBox = () => {
   const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ audio: true });
 
   const audioStatus = (status) => {
-    if(status == "idle"){
+    if(status === "idle"){
       return ''
-    } else if(status == "recording") {
-      return '...'
+    } else if(status === "recording") {
+      return 'Yozilmoqda..'
     } else {
       return ''
     }
@@ -39,7 +39,7 @@ export const TranslateBox = () => {
       return false;
     }
     if (source === "" || target === "") {
-      return error("Please select language");
+      return error("Iltimos tilni tanlang.");
     }
     
   };
@@ -64,7 +64,7 @@ export const TranslateBox = () => {
 
   const copyToClipboard = (text) => {
     copy(text);
-    success("Copied to clipboard!");
+    success("Nusxa olindi!");
   };
 
   const mickStart =  () => {
@@ -91,9 +91,9 @@ export const TranslateBox = () => {
 
   const resetText = () => {
     if (q === "" && output === "") {
-      error("Textbox is already empty!");
+      error("Tozalandi!");
     } else {
-      success("Text removed!");
+      success("Allaqachon bo'sh!");
       setQ("");
       setOutput("");
     }

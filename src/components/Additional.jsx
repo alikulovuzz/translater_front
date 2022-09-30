@@ -2,6 +2,7 @@ import React from "react";
 import { FaHistory } from "react-icons/fa";
 import { AiTwotoneStar } from "react-icons/ai";
 import { MdPeopleAlt } from "react-icons/md";
+import { IoMdThumbsDown,IoMdThumbsUp } from "react-icons/io";
 import axios from "axios";
 
 export default function Additional() {
@@ -47,19 +48,19 @@ export default function Additional() {
         <div className="addbox-img">
           <FaHistory />
         </div>
-        <div className="addbox-text">Tarix.</div>
+        <div className="addbox-text">Tarix</div>
       </div>
       <div className="addbox" onClick={handle2}>
         <div className="addbox-img">
-          <AiTwotoneStar />
+          <IoMdThumbsUp />
         </div>
-        <div className="addbox-text">Yashil.</div>
+        <div className="addbox-text">Yashil</div>
       </div>
       <div className="addbox" onClick={handle3}>
         <div className="addbox-img">
-          <MdPeopleAlt />
+          <IoMdThumbsDown />
         </div>
-        <div className="addbox-text">Oldingi.</div>
+        <div className="addbox-text">Oldingi</div>
       </div>
     </div>
   );

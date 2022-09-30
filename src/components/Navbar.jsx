@@ -1,4 +1,4 @@
-import lg_logo from '../images/lg_logo.jpg'
+import lg_logo from '../images/lg_logo.png'
 
 export const Navbar = () => {
 
@@ -9,7 +9,7 @@ export const Navbar = () => {
                     <div className="logo-img">
                         <img src={lg_logo} alt="logo" />
                     </div>
-                    <h1>Language Translator</h1>
+                    <h1>Tarjimon</h1>
                 </div>
             </div>
         </>
