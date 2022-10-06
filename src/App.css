@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
+  gap: 50px;
   padding-top: 150px;
   color: #ffffff;
 }
@@ -25,10 +25,9 @@
   border-radius: 20px;
   padding: 20px;
   font-size: 22px;
-  /* color: white; */
   font-weight: 500;
-  /* background: #74dcd2; */
-  /* bu rang box ichidagi backgroundga */
+  box-sizing: border-box;
+  width: 100%;
 }
 
 textarea {
@@ -232,7 +231,7 @@ select::-ms-expand {
 }
 
 .main-box-one {
-  width: 320px;
+  width: 500px;
 }
 
 .addbox-img {
@@ -270,6 +269,7 @@ select::-ms-expand {
 }
 .outputResult {
   background: #fff;
+  height: 260px;
 }
 .addbox-text {
   text-align: center;
@@ -349,4 +349,8 @@ select::-ms-expand {
 
 .logo .logo-img img {
   width: 100%;
+}
+
+.button-down{
+  transform: scale(0.9)
 }

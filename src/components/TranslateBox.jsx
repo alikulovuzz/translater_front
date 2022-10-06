@@ -82,7 +82,7 @@ export const TranslateBox = () => {
           audio: mediaBlobUrl
         }
       });
-      res = res.data.result;      
+      res = res.data.text;      
       setOutput(res);
     } catch (err) {
       console.log(err);
