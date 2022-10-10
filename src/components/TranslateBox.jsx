@@ -75,17 +75,18 @@ export const TranslateBox = () => {
   const mickStop =  async () => {
     stopRecording();
     setMickIsWorking(false);
+    const formData = new FormData();
+    formData.append("file", mediaBlobUrl);
     try {
-      let res = await axios.post(`http://89.249.63.227:8080/api/audio`, {
-        params: {},
-        body: {
-          audio: mediaBlobUrl
-        }
+      const response = await axios({
+        method: "post",
+        url: `http://89.249.63.227:8080/recognize`,
+        data: formData
       });
-      res = res.data.text;      
+      let res = response.data.text;      
       setOutput(res);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   }
 
