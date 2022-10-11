@@ -5,13 +5,28 @@ import { error, success } from "../utils/notification";
 import copy from "copy-to-clipboard";
 import { AiFillCopy } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
-import { Animation } from "./Animation";
+import { BsFillMicFill } from "react-icons/bs";
+import { useReactMediaRecorder } from "react-media-recorder";
+
+
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
+  const [mickIsWorking, setMickIsWorking] = useState(false);
+  const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ audio: true });
+
+  const audioStatus = (status) => {
+    if(status === "idle"){
+      return ''
+    } else if(status === "recording") {
+      return 'Yozilmoqda..'
+    } else {
+      return ''
+    }
+  }
 
   const handleSelectChange = ({ target: { value, id } }) => {
     id === "source" && setSource(value);
@@ -24,33 +39,62 @@ export const TranslateBox = () => {
       return false;
     }
     if (source === "" || target === "") {
-      return error("Please select language");
+      return error("Iltimos tilni tanlang.");
     }
-    try {
-      let res = await axios.get(`http://89.249.63.227:8080/api`, {
-        params: {
-          text: q,
-          from_lang:source,
-          to_lang:target,
-        },
-      });
-      res = res.data.result;      
-      setOutput(res);
-    } catch (err) {
-      console.log(err);
-    }
+    
   };
+
+  const enterPressHendle = async event => {
+    if (event.which === 13) {
+      try {
+        let res = await axios.get(`http://89.249.63.231/api`, {
+          params: {
+            text: q,
+            from_lang:source,
+            to_lang:target,
+          },
+        });
+        res = res.data.result;      
+        setOutput(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   const copyToClipboard = (text) => {
     copy(text);
-    success("Copied to clipboard!");
+    success("Nusxa olindi!");
   };
+
+  const mickStart =  () => {
+    startRecording();
+    setMickIsWorking(true);
+  }
+
+  const mickStop =  async () => {
+    stopRecording();
+    setMickIsWorking(false);
+    const formData = new FormData();
+    formData.append("file", mediaBlobUrl);
+    try {
+      const response = await axios({
+        method: "post",
+        url: `http://89.249.63.231/recognized`,
+        data: formData
+      });
+      let res = response.data.text;      
+      setOutput(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const resetText = () => {
     if (q === "" && output === "") {
-      error("Textbox is already empty!");
+      error("Tozalandi!");
     } else {
-      success("Text removed!");
+      success("Allaqachon bo'sh!");
       setQ("");
       setOutput("");
     }
@@ -70,7 +114,7 @@ export const TranslateBox = () => {
   return (
     <>
       <div className="mainBox">
-        <div>
+        <div className="main-box-one">
           <SelectBox id={"source"} select={handleSelectChange} />
           <div className="box">
             <textarea
@@ -79,10 +123,17 @@ export const TranslateBox = () => {
               }}
               value={q}
               className="outputResult"
+              onKeyPress={enterPressHendle}
             ></textarea>
           </div>
           <div className="iconBox">
             <p>{q.length}/250</p>
+            <p className='mick-status'>{audioStatus(status)}</p>
+            <div className="mick"
+              onMouseDown={mickStart} onMouseUp={mickStop}
+              >
+              <BsFillMicFill className={mickIsWorking?"mick-start":""}/>
+            </div>
             <AiFillCopy
               onClick={() => {
                 copyToClipboard(q);
@@ -92,8 +143,8 @@ export const TranslateBox = () => {
             <MdClear onClick={resetText} className="icon" />
           </div>
         </div>
-
-        <div>
+        
+        <div className="main-box-one">
           <SelectBox id={"target"} select={handleSelectChange} />
           <div className="outputResult box">
             <p id="output">{output}</p>
@@ -109,12 +160,8 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-
-      <Animation />
-
-      <div className="tagLine">
-        <p id="madeByMohit">Made By Azamat</p>
-      </div>
+      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
+      {/* <Animation /> */}
     </>
   );
 };
