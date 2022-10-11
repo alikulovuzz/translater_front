@@ -27,7 +27,7 @@ export const TranslateBox = () => {
       return error("Please select language");
     }
     try {
-      let res = await axios.get(`http://89.249.63.227:8080/api`, {
+      let res = await axios.get(`http://89.249.63.231/api`, {
         params: {
           text: q,
           from_lang:source,
