@@ -47,7 +47,7 @@ export const TranslateBox = () => {
   const enterPressHendle = async event => {
     if (event.which === 13) {
       try {
-        let res = await axios.get(`http://89.249.63.227:8080/api`, {
+        let res = await axios.get(`http://89.249.63.231/api`, {
           params: {
             text: q,
             from_lang:source,
@@ -80,7 +80,7 @@ export const TranslateBox = () => {
     try {
       const response = await axios({
         method: "post",
-        url: `http://89.249.63.227:8080/recognize`,
+        url: `http://89.249.63.231/recognized`,
         data: formData
       });
       let res = response.data.text;      
