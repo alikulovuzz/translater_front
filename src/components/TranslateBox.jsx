@@ -12,6 +12,7 @@ import { useReactMediaRecorder } from "react-media-recorder";
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
+  
   const [source, setSource] = useState("");
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
@@ -47,14 +48,15 @@ export const TranslateBox = () => {
   const enterPressHendle = async event => {
     if (event.which === 13) {
       try {
-        let res = await axios.get(`http://89.249.63.227:8080/api`, {
+        let res = await axios.get(`http://89.249.63.231/api/`, {
           params: {
             text: q,
             from_lang:source,
             to_lang:target,
           },
         });
-        res = res.data.result;      
+        res = res.data.result;
+        console.log(res)
         setOutput(res);
       } catch (err) {
         console.log(err);
@@ -80,11 +82,11 @@ export const TranslateBox = () => {
     try {
       const response = await axios({
         method: "post",
-        url: `http://89.249.63.227:8080/recognize`,
+        url: `http://localhost:8080/v1/file/uploadwav`,
         data: formData
       });
       let res = response.data.text;      
-      setOutput(res);
+      setOutput("res");
     } catch (error) {
       console.log(error);
     }
