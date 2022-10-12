@@ -48,11 +48,7 @@ export const TranslateBox = () => {
   const enterPressHendle = async event => {
     if (event.which === 13) {
       try {
-<<<<<<< HEAD
         let res = await axios.get(`http://89.249.63.231/api/`, {
-=======
-        let res = await axios.get(`http://89.249.63.231/api`, {
->>>>>>> 085d0e502ce3ac3147eeb1fc672936dbd16cfd56
           params: {
             text: q,
             from_lang:source,
