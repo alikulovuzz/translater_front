@@ -78,14 +78,20 @@ export const TranslateBox = () => {
     stopRecording();
     setMickIsWorking(false);
     const formData = new FormData();
-    formData.append("file", mediaBlobUrl);
+    const blob = new Blob(mediaBlobUrl);
+    const config = {
+      headers: {'content-type': 'multipart/form-data'}
+  }
+    formData.append("file", blob);
     try {
       const response = await axios({
         method: "post",
-        url: `http://89.249.63.231/recognized`,
-        data: formData
+        url: `https://registrator.stat.uz/file/uploadaudio`,
+        data: formData,
+        config
       });
-      let res = response.data.text;      
+      let res = response.data;
+      console.log(res)     
       setOutput("res");
     } catch (error) {
       console.log(error);
@@ -162,7 +168,7 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
+      <video src={mediaBlobUrl} controls autoPlay loop />
       {/* <Animation /> */}
     </>
   );

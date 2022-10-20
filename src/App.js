@@ -5,10 +5,10 @@ import { Navbar } from './components/Navbar';
 import { TranslateBox } from './components/TranslateBox';
 import Additional from './components/Additional';
 import Footer from './components/Footer';
-import RecordView from './components/RecordView';
+// import RecordView from './components/RecordView';
 
 
- const App = () => {
+export default function App(){
 
     return (
         <>
@@ -21,5 +21,3 @@ import RecordView from './components/RecordView';
         </>
     );
 };
-
-export default App
