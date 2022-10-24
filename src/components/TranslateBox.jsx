@@ -82,8 +82,8 @@ export const TranslateBox = () => {
     const config = {
       headers: {'content-type': 'multipart/form-data'}
   }
-  var file = new File([blob], "toserver.vaw");
-    formData.append("file", file);
+  // var file = new File([blob], "toserver.vaw");
+    formData.append("file", blob);
     try {
       const response = await axios({
         method: "post",
@@ -169,7 +169,7 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
+      <video src={mediaBlobUrl} controls autoPlay loop />
       {/* <Animation /> */}
     </>
   );
