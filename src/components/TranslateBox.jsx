@@ -179,7 +179,7 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-      <video src={mediaBlobUrl} controls autoPlay loop />
+      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
       {/* <Animation /> */}
     </>
   );
