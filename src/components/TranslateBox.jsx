@@ -17,7 +17,13 @@ export const TranslateBox = () => {
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
   const [mickIsWorking, setMickIsWorking] = useState(false);
-  const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ audio: true });
+  const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
+    video: false,
+        audio: true,
+        blobPropertyBag: {
+            type: "audio/wav"
+        }
+  });
 
   const audioStatus = (status) => {
     if(status === "idle"){
@@ -78,12 +84,16 @@ export const TranslateBox = () => {
     stopRecording();
     setMickIsWorking(false);
     const formData = new FormData();
-    const blob = new Blob(mediaBlobUrl);
     const config = {
       headers: {'content-type': 'multipart/form-data'}
   }
-  // var file = new File([blob], "toserver.vaw");
-    formData.append("file", blob);
+  
+  const createBlob =  await fetch(mediaBlobUrl)
+  const myBlob = await createBlob.blob()
+  const audiofile = new File([myBlob], `toserver.wav`, { type: "audio/wav" })
+  console.log(audiofile)
+  formData.append("file", audiofile);
+        
     try {
       const response = await axios({
         method: "post",
