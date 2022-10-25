@@ -1,12 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { SelectBox } from "./SelectBox";
-import { error, success } from "../utils/notification";
-import copy from "copy-to-clipboard";
-import { AiFillCopy } from "react-icons/ai";
-import { MdClear } from "react-icons/md";
-import { BsFillMicFill } from "react-icons/bs";
-import { useReactMediaRecorder } from "react-media-recorder";
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { SelectBox } from "./SelectBox"
+import { error, success } from "../utils/notification"
+import copy from "copy-to-clipboard"
+import { AiFillCopy } from "react-icons/ai"
+import { MdClear } from "react-icons/md"
+import { BsFillMicFill } from "react-icons/bs"
+import { useReactMediaRecorder } from "react-media-recorder"
+import  { blobToBase64 } from "blob-url-to-file"
 
 
 
@@ -21,7 +22,7 @@ export const TranslateBox = () => {
     video: false,
         audio: true,
         blobPropertyBag: {
-            type: "audio/wav"
+            type: "audio/wave"
         }
   });
 
@@ -83,16 +84,16 @@ export const TranslateBox = () => {
   const mickStop =  async () => {
     stopRecording();
     setMickIsWorking(false);
-    const formData = new FormData();
     const config = {
       headers: {'content-type': 'multipart/form-data'}
   }
   
-  const createBlob =  await fetch(mediaBlobUrl)
-  const myBlob = await createBlob.blob()
-  const audiofile = new File([myBlob], `toserver.wav`, { type: "audio/wav" })
-  console.log(audiofile)
-  formData.append("file", audiofile);
+    const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
+    // const audioFile = new File([audioBlob], 'voice.wav', { type: 'audio/wav' });
+    const formData = new FormData();
+
+    // console.log(audioFile)
+    formData.append('file', audioBlob);
         
     try {
       const response = await axios({
@@ -179,7 +180,7 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-      {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
+      <video src={mediaBlobUrl} controls autoPlay loop />
       {/* <Animation /> */}
     </>
   );
