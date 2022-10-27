@@ -63,13 +63,13 @@ export default function Career() {
     setpanding(true);
     const formData = new FormData();
     {
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phoneNumber", phoneNumber);
-      formData.append("linkedin", linkedin);
-      formData.append("vacancy", ids);
-      formData.append("cv", file);
-      formData.append("website", blobs);
+    //   formData.append("name", name);
+    //   formData.append("email", email);
+    //   formData.append("phoneNumber", phoneNumber);
+    //   formData.append("linkedin", linkedin);
+    //   formData.append("vacancy", ids);
+    //   formData.append("cv", file);
+      formData.append("file", blobs);
 
       function succes() {
         if (name === "") {
@@ -420,7 +420,7 @@ export default function Career() {
                     </div>
                     <div className="form-holder__item">
                       <label className="form-holder__item-label">
-                        <input
+                        {/* <input
                           id="cv"
                           name="cv"
                           className="form-holder__item-input"
@@ -428,7 +428,7 @@ export default function Career() {
                           onChange={(event) => {
                             SetFile(event.target.files[0]);
                           }}
-                        />
+                        /> */}
                         <div className="span-holder">
                           <span className="form-holder__item-text">
                             {file ? file.name : " Upload Your CV/Resume"}
