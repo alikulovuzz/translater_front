@@ -71,32 +71,32 @@ export default function Career() {
     //   formData.append("cv", file);
       formData.append("file", blobs);
 
-      function succes() {
-        if (name === "") {
-          setnameerror("User name can't be blank");
-        } else setnameerror("");
-        if (email == "") {
-          setemailerror("Email can't be blank");
-        } else setemailerror(" ");
-        if (phoneNumber === "") {
-          setphoneNumbererror("Phone can't be blank");
-        } else setphoneNumbererror("");
-        if (linkedin === "") {
-          setlinkedinerror("Linkedin can't be blank");
-        } else setlinkedinerror("");
+    //   function succes() {
+    //     if (name === "") {
+    //       setnameerror("User name can't be blank");
+    //     } else setnameerror("");
+    //     if (email == "") {
+    //       setemailerror("Email can't be blank");
+    //     } else setemailerror(" ");
+    //     if (phoneNumber === "") {
+    //       setphoneNumbererror("Phone can't be blank");
+    //     } else setphoneNumbererror("");
+    //     if (linkedin === "") {
+    //       setlinkedinerror("Linkedin can't be blank");
+    //     } else setlinkedinerror("");
 
-        if (
-          name === "" &&
-          email === "" &&
-          phoneNumber === "" &&
-          linkedin === ""
-        )
-          return false;
-        else return true;
-      }
-      if (succes()) {
-        if (file === "") setEror("Cv can't be blank");
-        else {
+    //     if (
+    //       name === "" &&
+    //       email === "" &&
+    //       phoneNumber === "" &&
+    //       linkedin === ""
+    //     )
+    //       return false;
+    //     else return true;
+    //   }
+    //   if (succes()) {
+        // if (file === "") setEror("Cv can't be blank");
+        // else {
           setEror("");
           fetch("--------------", { // <- shu yega url ni yozing
             method: "POST",
@@ -116,8 +116,8 @@ export default function Career() {
               console.log(data);
             })
             .catch((error) => console.log(error));
-        }
-      } else succes();
+        // }
+    //   } else succes();
     }
   };
 
