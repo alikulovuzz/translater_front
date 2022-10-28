@@ -1,15 +1,12 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { SelectBox } from "./SelectBox"
 import { error, success } from "../utils/notification"
 import copy from "copy-to-clipboard"
 import { AiFillCopy } from "react-icons/ai"
 import { MdClear } from "react-icons/md"
 import { BsFillMicFill } from "react-icons/bs"
-import { useReactMediaRecorder } from "react-media-recorder"
-import  { blobToBase64 } from "blob-url-to-file"
-
-
+import MicRecorder from "mic-recorder-to-mp3"
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
@@ -18,22 +15,43 @@ export const TranslateBox = () => {
   const [target, setTarget] = useState("");
   const [output, setOutput] = useState("");
   const [mickIsWorking, setMickIsWorking] = useState(false);
-  const { status, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
-    video: false,
-        audio: true,
-        blobPropertyBag: {
-            type: "audio/wave"
-        }
-  });
+  const recorder = useRef(null)
 
-  const audioStatus = (status) => {
-    if(status === "idle"){
-      return ''
-    } else if(status === "recording") {
-      return 'Yozilmoqda..'
-    } else {
-      return ''
-    }
+  useEffect(() => {
+    recorder.current = new MicRecorder({ bitRate: 128 })
+  }, [])
+
+  const startRecording = () => {
+    setMickIsWorking(true)
+    recorder.current.start().then(() => {
+    })
+  }
+
+  const stopRecording = () => {
+    setMickIsWorking(false)
+    recorder.current
+      .stop()
+      .getMp3()
+      .then(([buffer, blob]) => {
+        const file = new File(buffer, "audio.mp3", {
+          type: blob.type,
+          lastModified: Date.now(),
+        })
+        const formData = new FormData();
+        formData.append('file', file);
+        axios
+          .post("http://localhost:8080/file", formData, {
+            headers: {
+              "content-type": "application/json",
+              "transfer-encoding": "chunked",
+            }
+          })
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => console.error(err))
+      })
+      .catch((e) => console.log(e))
   }
 
   const handleSelectChange = ({ target: { value, id } }) => {
@@ -76,40 +94,6 @@ export const TranslateBox = () => {
     success("Nusxa olindi!");
   };
 
-  const mickStart =  () => {
-    startRecording();
-    setMickIsWorking(true);
-  }
-
-  const mickStop =  async () => {
-    stopRecording();
-    setMickIsWorking(false);
-    const config = {
-      headers: {'content-type': 'multipart/form-data'}
-  }
-  
-    const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
-    // const audioFile = new File([audioBlob], 'voice.wav', { type: 'audio/wav' });
-    const formData = new FormData();
-
-    // console.log(audioFile)
-    formData.append('file', audioBlob);
-        
-    try {
-      const response = await axios({
-        method: "post",
-        url: `https://registrator.stat.uz/file/uploadaudio`,
-        data: formData,
-        config
-      });
-      let res = response.data;
-      console.log(res)     
-      setOutput("res");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const resetText = () => {
     if (q === "" && output === "") {
       error("Tozalandi!");
@@ -148,9 +132,8 @@ export const TranslateBox = () => {
           </div>
           <div className="iconBox">
             <p>{q.length}/250</p>
-            <p className='mick-status'>{audioStatus(status)}</p>
             <div className="mick"
-              onMouseDown={mickStart} onMouseUp={mickStop}
+              onMouseDown={startRecording} onMouseUp={stopRecording}
               >
               <BsFillMicFill className={mickIsWorking?"mick-start":""}/>
             </div>
@@ -180,8 +163,6 @@ export const TranslateBox = () => {
           </div>
         </div>
       </div>
-      <video src={mediaBlobUrl} controls autoPlay loop />
-      {/* <Animation /> */}
     </>
   );
 };

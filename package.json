@@ -10,6 +10,8 @@
     "axios": "^0.27.2",
     "blob-url-to-file": "^1.0.0",
     "copy-to-clipboard": "^3.3.2",
+    "mic-recorder": "^4.9.0",
+    "mic-recorder-to-mp3": "^2.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
