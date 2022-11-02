@@ -8,6 +8,13 @@ export const success = (title) => {
     });
 }
 
+export const success_notification = (title) => {
+    toast.success(title, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        theme: 'colored'
+    });
+}
+
 export const error = (title) => {
     toast.error(title, {
         position: toast.POSITION.BOTTOM_CENTER,

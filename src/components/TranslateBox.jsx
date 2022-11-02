@@ -6,13 +6,15 @@ import copy from "copy-to-clipboard"
 import { AiFillCopy } from "react-icons/ai"
 import { MdClear } from "react-icons/md"
 import { BsFillMicFill } from "react-icons/bs"
+import { BiTransferAlt } from "react-icons/bi"
+
 import MicRecorder from "mic-recorder-to-mp3"
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
   
-  const [source, setSource] = useState("");
-  const [target, setTarget] = useState("");
+  const [source, setSource] = useState(1);
+  const [target, setTarget] = useState(2);
   const [output, setOutput] = useState("");
   const [mickIsWorking, setMickIsWorking] = useState(false);
   const recorder = useRef(null)
@@ -119,7 +121,7 @@ export const TranslateBox = () => {
     <>
       <div className="mainBox">
         <div className="main-box-one">
-          <SelectBox id={"source"} select={handleSelectChange} />
+          <SelectBox id={"source"} select={handleSelectChange} chengedOption={source}/>
           <div className="box">
             <textarea
               onChange={(e) => {
@@ -135,8 +137,13 @@ export const TranslateBox = () => {
             <div className="mick"
               onMouseDown={startRecording} onMouseUp={stopRecording}
               >
-              <BsFillMicFill className={mickIsWorking?"mick-start":""}/>
+                <button id="speech" className="btn type2">
+                  <div className={mickIsWorking?"pulse-ring":""}>
+                  </div>
+                    <BsFillMicFill />
+                </button>
             </div>
+            
             <AiFillCopy
               onClick={() => {
                 copyToClipboard(q);
@@ -146,9 +153,17 @@ export const TranslateBox = () => {
             <MdClear onClick={resetText} className="icon" />
           </div>
         </div>
-        
+        <div 
+          style={{backgroundColor: "#45b5aa", cursor: "pointer", width: "50px", height: "50px", borderRadius: "50%", fontSize: "30px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff"}}
+          onClick={(_) => {
+            setSource(target);
+            setTarget(source);
+          }}
+        >
+          <BiTransferAlt/>
+        </div>
         <div className="main-box-one">
-          <SelectBox id={"target"} select={handleSelectChange} />
+          <SelectBox id={"target"} select={handleSelectChange} chengedOption={target}/>
           <div className="outputResult box">
             <p id="output">{output}</p>
           </div>

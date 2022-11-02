@@ -4,6 +4,7 @@ import { AiTwotoneStar } from "react-icons/ai";
 import { MdPeopleAlt } from "react-icons/md";
 import { IoMdThumbsDown,IoMdThumbsUp } from "react-icons/io";
 import axios from "axios";
+import { error, success_notification } from "../utils/notification"
 
 export default function Additional() {
 
@@ -15,6 +16,7 @@ export default function Additional() {
 
   const handle1 = async (event) => {
     try {
+      success_notification("Yoramingiz uchun rahmat! Sizning fikringiz biz uchun muhim.");
       let res = await axios.get(`http://89.249.63.227:8080/api/nimadir`, {
         params: {},
         data: {},
@@ -27,6 +29,7 @@ export default function Additional() {
 
   const handle2 = async (event) => {
     try {
+      success_notification("Yoramingiz uchun rahmat! Sizning fikringiz biz uchun muhim.");
       let res = await axios.get(`http://89.249.63.227:8080/api/nimadir`, {
         params: {},
         data: {},
@@ -39,6 +42,7 @@ export default function Additional() {
 
   const handle3 = async (event) => {
     try {
+      success_notification("Yoramingiz uchun rahmat! Sizning fikringiz biz uchun muhim.");
       let res = await axios.get(`http://89.249.63.227:8080/api/nimadir`, {
         params: {},
         data: {},
@@ -54,8 +58,7 @@ export default function Additional() {
       <div 
         className="addbox" 
       >
-        <div 
-          className={buttonDown.button1?"addbox-img button-down":"addbox-img"}
+        <div className={`button-container button-flip-horizontal`}
           onClick={handle1}
           onMouseDown={(_) => {setButtonDown({
             button1: true,
@@ -68,49 +71,69 @@ export default function Additional() {
             button3: false
           })}}
         >
-          <FaHistory />
-        </div>
+		        <div className={`flipper flipper-flip-horizontal ${buttonDown.button1?"myclasseffect":""}`}>
+		            <div className="button front">
+                  <FaHistory />
+		            </div>
+		            <div className="button back">
+                  <AiTwotoneStar />
+		            </div>
+		        </div>
+		    </div>
         <div className="addbox-text">Tarix</div>
       </div>
       <div 
         className="addbox" 
       >
-        <div
-          className={buttonDown.button2?"addbox-img button-down":"addbox-img"}
-          onClick={handle2} 
+        <div className={`button-container button-flip-horizontal`}
+          onClick={handle2}
           onMouseDown={(_) => {setButtonDown({
             button1: false,
             button2: true,
             button3: false
-          })}} 
+          })}}
           onMouseUp={(_) => {setButtonDown({
             button1: false,
             button2: false,
             button3: false
           })}}
         >
-          <IoMdThumbsUp />
-        </div>
+		        <div className={`flipper flipper-flip-horizontal ${buttonDown.button2?"myclasseffect":""}`}>
+		            <div className="button front">
+                  <FaHistory />
+		            </div>
+		            <div className="button back">
+                  <AiTwotoneStar />
+		            </div>
+		        </div>
+		    </div>
         <div className="addbox-text">Yashil</div>
       </div>
       <div 
         className="addbox" 
       >
-        <div className={buttonDown.button3?"addbox-img button-down":"addbox-img"}
-          onClick={handle3} 
+        <div className={`button-container button-flip-horizontal`}
+          onClick={handle3}
           onMouseDown={(_) => {setButtonDown({
             button1: false,
             button2: false,
             button3: true
-          })}} 
+          })}}
           onMouseUp={(_) => {setButtonDown({
             button1: false,
             button2: false,
             button3: false
           })}}
         >
-          <IoMdThumbsDown />
-        </div>
+		        <div className={`flipper flipper-flip-horizontal ${buttonDown.button3?"myclasseffect":""}`}>
+		            <div className="button front">
+                  <FaHistory />
+		            </div>
+		            <div className="button back">
+                  <AiTwotoneStar />
+		            </div>
+		        </div>
+		    </div>
         <div className="addbox-text">Oldingi</div>
       </div>
     </div>
