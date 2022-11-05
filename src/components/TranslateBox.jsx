@@ -42,14 +42,15 @@ export const TranslateBox = () => {
         const formData = new FormData();
         formData.append('file', file);
         axios
-          .post("http://localhost:8080/file", formData, {
+          .post("http://89.249.63.227/recognizeww", formData, {
             headers: {
               "content-type": "application/json",
               "transfer-encoding": "chunked",
             }
           })
           .then((res) => {
-            console.log(res.data)
+            console.log(res.data.text)
+            setQ(res.data.text);
           })
           .catch((err) => console.error(err))
       })

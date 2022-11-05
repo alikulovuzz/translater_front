@@ -107,7 +107,7 @@ export default function Additional() {
 		            </div>
 		        </div>
 		    </div>
-        <div className="addbox-text">Yashil</div>
+        <div className="addbox-text">Yaxshi</div>
       </div>
       <div 
         className="addbox" 
@@ -134,7 +134,7 @@ export default function Additional() {
 		            </div>
 		        </div>
 		    </div>
-        <div className="addbox-text">Oldingi</div>
+        <div className="addbox-text">Yomon</div>
       </div>
     </div>
   );
