@@ -154,11 +154,13 @@ export const TranslateBox = () => {
             <MdClear onClick={resetText} className="icon" />
           </div>
         </div>
-        <div 
-          style={{backgroundColor: "#45b5aa", cursor: "pointer", width: "50px", height: "50px", borderRadius: "50%", fontSize: "30px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff"}}
+        <div
+          className="lang-chenger"
           onClick={(_) => {
             setSource(target);
             setTarget(source);
+            setQ(output);
+            setOutput(q)
           }}
         >
           <BiTransferAlt/>
