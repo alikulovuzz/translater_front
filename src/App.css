@@ -149,10 +149,9 @@ select::-ms-expand {
   }
 }
 
+
+
 @media screen and (max-width: 800px) {
-  .mainBox {
-    gap: 30px;
-  }
 
   .box {
     min-height: 180px;
@@ -164,10 +163,6 @@ select::-ms-expand {
 }
 
 @media screen and (max-width: 720px) {
-  .mainBox {
-    gap: 60px;
-    flex-direction: column;
-  }
 
   .box {
     min-height: 180px;
@@ -179,10 +174,6 @@ select::-ms-expand {
 }
 
 @media screen and (max-width: 600px) {
-  .mainBox {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 60px;
-  }
 
   .box {
     min-height: 150px;
@@ -215,7 +206,7 @@ select::-ms-expand {
   .main-box-one {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 30px;
+    /* padding: 0 30px; */
   }
 }
 
@@ -234,6 +225,35 @@ select::-ms-expand {
 
 .main-box-one {
   width: 520px;
+}
+
+@media screen and (max-width: 1130px) {
+  .main-box-one {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .mainBox {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+  }
+  .main-box-one {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .mainBox {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  .main-box-one {
+    width: 100%;
+  }
 }
 
 .addbox-img {
@@ -522,6 +542,12 @@ select::-ms-expand {
   padding: 20px;
   border: 1px solid #888;
   width: 60%;
+}
+
+@media screen and (max-width: 500px) {
+  .modal-content {
+    width: 80%;
+  }
 }
 
 .close {

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useMemo } from "react"
 import { SelectBox } from "./SelectBox"
 import { error, success } from "../utils/notification"
 import copy from "copy-to-clipboard"
@@ -7,17 +7,23 @@ import { AiFillCopy } from "react-icons/ai"
 import { MdClear } from "react-icons/md"
 import { BsFillMicFill } from "react-icons/bs"
 import { BiTransferAlt } from "react-icons/bi"
-
 import MicRecorder from "mic-recorder-to-mp3"
+import { useDebounce } from 'use-debounce'
+
+
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
-  
   const [source, setSource] = useState(1);
   const [target, setTarget] = useState(2);
   const [output, setOutput] = useState("");
   const [mickIsWorking, setMickIsWorking] = useState(false);
   const recorder = useRef(null)
+  const [value] = useDebounce(q, 2000);
+
+  useEffect(() => {
+    enterPressHendle()
+  },[value])
 
   useEffect(() => {
     recorder.current = new MicRecorder({ bitRate: 128 })
@@ -58,23 +64,11 @@ export const TranslateBox = () => {
   }
 
   const handleSelectChange = ({ target: { value, id } }) => {
-    id === "source" && setSource(value);
-    id === "target" && setTarget(value);
-  };
-
-  const handleGetRequest = async () => {
-    if (q.length < 1) {
-      setOutput("");
-      return false;
-    }
-    if (source === "" || target === "") {
-      return error("Iltimos tilni tanlang.");
-    }
-    
+    id === "source" && target !== value && setSource(value);
+    id === "target" && source !== value && setTarget(value);
   };
 
   const enterPressHendle = async event => {
-    if (event.which === 13) {
       try {
         let res = await axios.get(`https://89.249.63.231/api/`, {
           params: {
@@ -89,7 +83,6 @@ export const TranslateBox = () => {
       } catch (err) {
         console.log(err);
       }
-    }
   }
 
   const copyToClipboard = (text) => {
@@ -107,17 +100,6 @@ export const TranslateBox = () => {
     }
   };
 
-  //Debounce Function
-  useEffect(() => {
-    let timerID = setTimeout(() => {
-      handleGetRequest();
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerID);
-    };
-  }, [q]);
-
   return (
     <>
       <div className="mainBox">
@@ -126,16 +108,18 @@ export const TranslateBox = () => {
           <div className="box">
             <textarea
               onChange={(e) => {
-                setQ(e.target.value);
+                if(e.target.value.length <= 250){
+                  setQ(e.target.value);
+                }
               }}
               value={q}
               className="outputResult"
-              onKeyPress={enterPressHendle}
             ></textarea>
           </div>
           <div className="iconBox">
             <p>{q.length}/250</p>
-            <div className="mick"
+            {
+              source === 1&&<div className="mick"
               onMouseDown={startRecording} onMouseUp={stopRecording}
               >
                 <button id="speech" className="btn type2">
@@ -144,7 +128,7 @@ export const TranslateBox = () => {
                     <BsFillMicFill />
                 </button>
             </div>
-            
+            }
             <AiFillCopy
               onClick={() => {
                 copyToClipboard(q);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { FaHistory, FaRegThumbsUp,FaRegThumbsDown } from "react-icons/fa";
+import { FaRegThumbsUp,FaRegThumbsDown } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
-import { AiTwotoneStar } from "react-icons/ai";
 import axios from "axios";
 import { success_notification } from "../utils/notification"
 
@@ -27,19 +26,6 @@ export default function Additional() {
   };
 
   const handle2 = async (event) => {
-    try {
-      success_notification("Yoramingiz uchun rahmat! Sizning fikringiz biz uchun muhim.");
-      let res = await axios.get(`http://89.249.63.227:8080/api/nimadir`, {
-        params: {},
-        data: {},
-      });
-      console.log(res.data.result);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handle3 = async (event) => {
     try {
       success_notification("Yoramingiz uchun rahmat! Sizning fikringiz biz uchun muhim.");
       let res = await axios.get(`http://89.249.63.227:8080/api/nimadir`, {
@@ -135,6 +121,11 @@ export default function Additional() {
               {/* <b className="addbox-text">Matinning rus tilidan o'zbek tiliga tarjimasi</b> */}
               <button className="modal-send-button" onClick={(_) => {
                 handle1()
+                setButtonDown({
+                  button1: false,
+                  button2: false,
+                  button3: false
+                })
               }}>Yuborish</button>
             </div>
           </div>
