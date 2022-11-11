@@ -42,7 +42,7 @@ export const TranslateBox = () => {
         const formData = new FormData();
         formData.append('file', file);
         axios
-          .post("https://89.249.63.227/recognizews", formData, {
+          .post("https://89.249.63.227/recognizeww", formData, {
             headers: {
               "content-type": "application/json",
               "transfer-encoding": "chunked",

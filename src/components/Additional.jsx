@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaHistory } from "react-icons/fa";
+import { FaHistory, FaRegThumbsUp,FaRegThumbsDown } from "react-icons/fa";
+import { BsCheckLg } from "react-icons/bs";
 import { AiTwotoneStar } from "react-icons/ai";
 import axios from "axios";
 import { success_notification } from "../utils/notification"
@@ -57,37 +58,6 @@ export default function Additional() {
         className="addbox"
       >
         <div className={`button-container button-flip-horizontal`}
-          onClick={handle1}
-          onMouseDown={(_) => {
-            setButtonDown({
-              button1: true,
-              button2: false,
-              button3: false
-            })
-          }}
-          onMouseUp={(_) => {
-            setButtonDown({
-              button1: false,
-              button2: false,
-              button3: false
-            })
-          }}
-        >
-          <div className={`flipper flipper-flip-horizontal ${buttonDown.button1 ? "myclasseffect" : ""}`}>
-            <div className="button front">
-              <FaHistory />
-            </div>
-            <div className="button back">
-              <AiTwotoneStar />
-            </div>
-          </div>
-        </div>
-        <div className="addbox-text">Tarix</div>
-      </div>
-      <div
-        className="addbox"
-      >
-        <div className={`button-container button-flip-horizontal`}
           onClick={handle2}
           onMouseDown={(_) => {
             setButtonDown({
@@ -106,10 +76,10 @@ export default function Additional() {
         >
           <div className={`flipper flipper-flip-horizontal ${buttonDown.button2 ? "myclasseffect" : ""}`}>
             <div className="button front">
-              <FaHistory />
+              <FaRegThumbsUp />
             </div>
             <div className="button back">
-              <AiTwotoneStar />
+              <BsCheckLg />
             </div>
           </div>
         </div>
@@ -119,12 +89,12 @@ export default function Additional() {
         className="addbox"
       >
         <div className={`button-container button-flip-horizontal`}
-          onClick={handle3}
+          onClick={handle1}
           onMouseDown={(_) => {
             setButtonDown({
-              button1: false,
+              button1: true,
               button2: false,
-              button3: true
+              button3: false
             })
           }}
           onMouseUp={(_) => {
@@ -135,12 +105,12 @@ export default function Additional() {
             })
           }}
         >
-          <div className={`flipper flipper-flip-horizontal ${buttonDown.button3 ? "myclasseffect" : ""}`}>
+          <div className={`flipper flipper-flip-horizontal ${buttonDown.button1 ? "myclasseffect" : ""}`}>
             <div className="button front">
-              <FaHistory />
+              <FaRegThumbsDown />
             </div>
             <div className="button back">
-              <AiTwotoneStar />
+              <BsCheckLg />
             </div>
           </div>
         </div>
