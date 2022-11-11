@@ -6,7 +6,7 @@
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  gap: 50px;
+  gap: 10px;
   padding-top: 150px;
   /* color: #ffffff; */
 }
@@ -233,7 +233,7 @@ select::-ms-expand {
 }
 
 .main-box-one {
-  width: 500px;
+  width: 520px;
 }
 
 .addbox-img {

@@ -42,7 +42,7 @@ export const TranslateBox = () => {
         const formData = new FormData();
         formData.append('file', file);
         axios
-          .post("http://89.249.63.227/recognizeww", formData, {
+          .post("https://89.249.63.227/recognizews", formData, {
             headers: {
               "content-type": "application/json",
               "transfer-encoding": "chunked",
@@ -76,7 +76,7 @@ export const TranslateBox = () => {
   const enterPressHendle = async event => {
     if (event.which === 13) {
       try {
-        let res = await axios.get(`http://89.249.63.231/api/`, {
+        let res = await axios.get(`https://89.249.63.231/api/`, {
           params: {
             text: q,
             from_lang:source,
