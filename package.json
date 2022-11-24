@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",
     "react-webcam": "^7.0.1",
+    "sass": "^1.56.1",
     "use-debounce": "^8.0.4",
     "web-vitals": "^2.1.4"
   },

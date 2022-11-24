@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# Getting Started with Create React Appjj
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available ScriptsBot
+## Available Scripts
 
 In the project directory, you can run:change
 

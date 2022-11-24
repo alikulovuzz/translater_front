@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Navbar } from './components/Navbar';
@@ -14,7 +14,6 @@ export default function App(){
         <>
             <Navbar />
             <TranslateBox/>
-            <Additional/>
             <Footer/>
             <ToastContainer autoClose={3000} />
         </>

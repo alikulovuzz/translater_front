@@ -69,7 +69,7 @@ export default function Additional() {
             </div>
           </div>
         </div>
-        <div className="addbox-text">Yaxshi</div>
+        {/* <div className="addbox-text">Yaxshi</div> */}
       </div>
       <div
         className="addbox"
@@ -100,7 +100,7 @@ export default function Additional() {
             </div>
           </div>
         </div>
-        <div className="addbox-text">Yomon</div>
+        {/* <div className="addbox-text">Yomon</div> */}
       </div>
       <div id="myModal" className={`modal ${buttonDown.button1 ? "" : "dbn"}`}>
         <div className="modal-content">
