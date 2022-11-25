@@ -124,6 +124,8 @@ export const TranslateBox = () => {
                   className="mick"
                   onMouseDown={startRecording}
                   onMouseUp={stopRecording}
+                  onPointerDown={startRecording}
+                  onPointerUp={stopRecording}
                 >
                   <button id="speech" className="btn type2">
                     <div className={mickIsWorking ? "pulse-ring" : ""}></div>
