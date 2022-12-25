@@ -9,7 +9,7 @@ export const Navbar = () => {
                     <div className="logo-img">
                         <img src={lg_logo} alt="logo" />
                     </div>
-                    <h1>Tarjimon</h1>
+                    <h1>CYBER PARK</h1>
                 </div>
             </div>
         </>
