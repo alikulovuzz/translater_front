@@ -422,7 +422,7 @@ select::-ms-expand {
   color: #fff;
   padding: 0;
   margin: 0;
-  background: red;
+  // background: #189bff;
   position: relative;
   display: inline-block;
   line-height: 45px;
@@ -454,6 +454,10 @@ select::-ms-expand {
 
 .type2 {
   background: #189bff;
+}
+
+.type3 {
+  color: red;
 }
 
 @keyframes pulsate {

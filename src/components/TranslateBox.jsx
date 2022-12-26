@@ -5,11 +5,12 @@ import { error, success } from "../utils/notification";
 import copy from "copy-to-clipboard";
 import { AiFillCopy } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
-import { BsFillMicFill } from "react-icons/bs";
+import { BsFillMicFill, BsStopCircle } from "react-icons/bs";
 import { BiTransferAlt } from "react-icons/bi";
 import MicRecorder from "mic-recorder-to-mp3";
 import { useDebounce } from "use-debounce";
 import Additional from "./Additional";
+
 
 export const TranslateBox = () => {
   const [q, setQ] = useState("");
@@ -30,7 +31,7 @@ export const TranslateBox = () => {
 
   const startRecording = () => {
     setMickIsWorking(true);
-    recorder.current.start().then(() => {});
+    recorder.current.start().then(() => { });
   };
 
   const stopRecording = () => {
@@ -119,19 +120,27 @@ export const TranslateBox = () => {
             ></textarea>
             <div className="iconBox">
               <p>{q.length}/250</p>
-              {source === 1 && (
-                <div
-                  className="mick"
-                  onMouseDown={startRecording}
-                  onMouseUp={stopRecording}
-                  onPointerDown={startRecording}
-                  onPointerUp={stopRecording}
-                >
-                  <button id="speech" className="btn type2">
-                    <div className={mickIsWorking ? "pulse-ring" : ""}></div>
-                    <BsFillMicFill />
-                  </button>
-                </div>
+              {source == 1 && (
+                <>
+                  <div
+                    className="mick"
+                    onClick={startRecording}
+                    // onMouseUp={stopRecording}
+                  >
+                    <button id="speech" className="btn type2">
+                      <div className={mickIsWorking ? "pulse-ring" : ""}></div>
+                      <BsFillMicFill />
+                    </button>
+                  </div>
+                  {mickIsWorking === true ?<div
+                    className="mick"
+                    onClick={stopRecording}
+                  >
+                    <button id="speech" className="btn type3">
+                      <BsStopCircle />
+                    </button>
+                  </div>:<></>}
+                </>
               )}
               <AiFillCopy
                 onClick={() => {
