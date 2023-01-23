@@ -111,14 +111,14 @@ export const TranslateBox = () => {
             <textarea
               className="textarea"
               onChange={(e) => {
-                if (e.target.value.length <= 250) {
+                if (e.target.value.length <= 500) {
                   setQ(e.target.value);
                 }
               }}
               value={q}
             ></textarea>
             <div className="iconBox">
-              <p>{q.length}/250</p>
+              <p>{q.length}/500</p>
               {source === 1 && (
                 <div
                   className="mick"
@@ -166,7 +166,7 @@ export const TranslateBox = () => {
             </p>
             <div className="iconBox">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <span>{output.length}/250</span>
+                <span>{output.length}/500</span>
                 <AiFillCopy
                   onClick={() => {
                     copyToClipboard(output);

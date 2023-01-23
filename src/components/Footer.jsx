@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className='footer'>
         {/* <img src={lg_logo} alt="logo" /> */}
-        <p>&copy; <em id="date">2022</em> "CYBER PARK" MChJ</p>
+        <p>&copy;  2022 "CYBER PARK" MChJ</p>
     </div>
   )
 }
